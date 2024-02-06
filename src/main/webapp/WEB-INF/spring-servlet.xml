@@ -11,7 +11,8 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
-	<context:component-scan base-package="com.dilip.*" />
+	<context:component-scan
+		base-package="com.dilip.*" />
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven />
 
@@ -20,6 +21,10 @@
 		<property name="prefix" value="/WEB-INF/pages/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
-
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/home" /> <!--for each /home request interceptor method will get call -->
+			<bean class="com.dilip.intercepter.RequesthandelerInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
