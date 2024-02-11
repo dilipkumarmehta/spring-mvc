@@ -34,6 +34,7 @@ public class TestController {
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public ModelAndView index() {
+		
 		System.out.println("index call");
 		System.out.println("b2c.clientId " + clientID);
 		return new ModelAndView("index");
