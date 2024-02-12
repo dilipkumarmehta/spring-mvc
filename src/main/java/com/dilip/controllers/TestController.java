@@ -1,5 +1,7 @@
 package com.dilip.controllers;
 
+import java.util.Properties;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dilip.config.AppConfig;
+import com.dilip.intercepter.RequesthandelerInterceptor;
 
 /**
  * http://localhost:8080/spring-mvc/index http://localhost:8080/spring-mvc/home
@@ -22,8 +25,18 @@ public class TestController {
 	@Autowired
 	AppConfig appConfig;
 
+	@Value("#{systemProperties['java.class.path']}")
+	private String systemProperti;
+
 	@Value("${b2c.clientId}")
 	public String clientID;
+
+	TestController() {
+
+	}
+
+	@Autowired
+	RequesthandelerInterceptor requesthandelerInterceptor;
 
 	@RequestMapping(value = "/home")
 	public String home() {
@@ -34,8 +47,12 @@ public class TestController {
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public ModelAndView index() {
-		
+		System.out.println("systemProperti:  " + systemProperti);
+		System.out.println("*************88");
+		Properties properties = System.getProperties();
+		properties.entrySet().stream().forEach(p -> System.out.print(p));
 		System.out.println("index call");
+		System.out.println(requesthandelerInterceptor);
 		System.out.println("b2c.clientId " + clientID);
 		return new ModelAndView("index");
 
