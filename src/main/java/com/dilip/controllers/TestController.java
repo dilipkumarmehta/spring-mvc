@@ -1,5 +1,6 @@
 package com.dilip.controllers;
 
+import java.util.Arrays;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,9 +9,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dilip.config.AppConfig;
@@ -35,14 +42,45 @@ public class TestController {
 
 	}
 
+	RestTemplate restTemplate = new RestTemplate();
 	@Autowired
 	RequesthandelerInterceptor requesthandelerInterceptor;
+
+	/*
+	 */
+	public void postCall() {
+		// post call
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		headers.set("X-COM-PERSIST", "NO");
+		headers.set("X-COM-LOCATION", "USA");
+
+		Object req = new Object();
+		HttpEntity<Object> entity = new HttpEntity<>(req, headers);
+		String url = "http://localhost:8080/users/{id}";
+		ResponseEntity<Object> responseEntity = restTemplate.exchange(url, HttpMethod.POST, entity, Object.class);
+		responseEntity.getBody();
+
+	}
+
+	public void getCall() {
+		// post call
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		headers.set("X-COM-PERSIST", "NO");
+		headers.set("X-COM-LOCATION", "USA");
+		HttpEntity<String> entity = new HttpEntity<String>(headers);
+		String url = "http://localhost:8080/users/{id}";
+		ResponseEntity<Object> responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, Object.class);
+		responseEntity.getBody();
+		// call
+	}
 
 	@RequestMapping(value = "/home")
 	public String home() {
 		System.out.println("home call");
-		return "index";
 
+		return "index";
 	}
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
