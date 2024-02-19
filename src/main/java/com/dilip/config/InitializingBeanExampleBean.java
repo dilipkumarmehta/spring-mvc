@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.WebApplicationInitializer;
 
 @Component
-public class InitializingBeanExampleBean implements InitializingBean,WebApplicationInitializer {
+public class InitializingBeanExampleBean implements InitializingBean, WebApplicationInitializer {
 
 	@Autowired
 	private Environment environment;
@@ -20,7 +20,7 @@ public class InitializingBeanExampleBean implements InitializingBean,WebApplicat
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		System.out.println("***************InitializingBeanExampleBean*********");
+		System.out.println("***************afterPropertiesSet *********");
 		Thread.sleep(100);
 		String[] beanDefinitionNames = applicationContext.getBeanDefinitionNames();
 		for (String s : beanDefinitionNames) {
@@ -30,10 +30,9 @@ public class InitializingBeanExampleBean implements InitializingBean,WebApplicat
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
-	System.setProperty("abc.value", "dilip");
-		
+		System.out.println("***************onStartup *********");
+		System.setProperty("abc.value", "dilip");
+
 	}
-	
-	
-	
+
 }
