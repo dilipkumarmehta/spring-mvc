@@ -12,10 +12,10 @@ public class RequesthandelerInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		System.out.println("interceptor get call");
-		if (true) {
+		if (false) { //make true
 			response.setContentType("text/html");
-			response.getWriter().println("Getting response from interceptor not forwardign the request to controller");
-			return false;
+			response.getWriter().println(" true Getting response from interceptor not forwardign the request to controller");
+		   return false;
 		}
 		return super.preHandle(request, response, handler);
 	}
