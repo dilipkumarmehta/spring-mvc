@@ -2,6 +2,7 @@ package com.dilip.config;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Properties;
 
 import javax.servlet.ServletContext;
@@ -20,9 +21,11 @@ public class InitializingBeanExampleBean implements InitializingBean, WebApplica
 
 	@Autowired
 	private Environment environment;
+
 	@Autowired
 	private ApplicationContext applicationContext;
 
+	public static HashMap<String, String> map = new HashMap<String, String>();
 	@Value("${b2c.clientId}")
 	String name;
 
@@ -41,15 +44,16 @@ public class InitializingBeanExampleBean implements InitializingBean, WebApplica
 		System.out.println("***************onStartup ********* set the properteis befor loading the xml configuration");
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();
 		Properties properties = new Properties();
-		try (InputStream resourceStream = loader.getResourceAsStream("application.properties")) {
+		try (InputStream resourceStream = loader.getResourceAsStream("application2.properties")) {
 			properties.load(resourceStream);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println(applicationContext);
 		System.out.println(properties.size());
+		map.put("b2c.redirectUri", properties.get("b2c.redirectUri").toString());
 		System.out.println("b2c.redirectUri" + properties.get("b2c.redirectUri"));
 		System.setProperty("abc.value", properties.get("b2c.redirectUri").toString());
-		
 
 	}
 

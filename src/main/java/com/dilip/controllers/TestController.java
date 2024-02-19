@@ -21,6 +21,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dilip.config.AppConfig;
+import com.dilip.config.InitializingBeanExampleBean;
 import com.dilip.intercepter.RequesthandelerInterceptor;
 
 /**
@@ -31,6 +32,9 @@ public class TestController {
 
 	@Autowired
 	AppConfig appConfig;
+
+	@Autowired
+	InitializingBeanExampleBean initializingBeanExampleBean;
 
 	@Value("#{systemProperties['java.class.path']}")
 	private String systemProperti;
@@ -43,7 +47,8 @@ public class TestController {
 	}
 
 	RestTemplate restTemplate = new RestTemplate();
-	@Autowired
+
+	@Autowired(required = false)
 	RequesthandelerInterceptor requesthandelerInterceptor;
 
 	/*
@@ -85,6 +90,8 @@ public class TestController {
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public ModelAndView index() {
+		String string = initializingBeanExampleBean.map.get("b2c.redirectUri");
+		System.out.println("geting value from Map created while tomcat startup" + string);
 		System.out.println("systemProperti:  " + systemProperti);
 		System.out.println("*************88");
 		Properties properties = System.getProperties();
