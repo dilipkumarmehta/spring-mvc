@@ -40,12 +40,12 @@ public class SSOFilter implements Filter {
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
-		System.out.println("helloFilter");
+		System.out.println("doFilter method called");
 		// pass the request along the filter chain
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 		HttpSession session = httpRequest.getSession();
-		session.setAttribute("hello", "mysessionObject");
+		session.setAttribute("sessionobject", "mysessionObject");
 		
 		chain.doFilter(request, response);
 	}

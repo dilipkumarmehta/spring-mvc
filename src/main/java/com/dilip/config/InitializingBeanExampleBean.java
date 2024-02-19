@@ -30,7 +30,7 @@ public class InitializingBeanExampleBean implements InitializingBean, WebApplica
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
-		System.out.println("***************onStartup *********");
+		System.out.println("***************onStartup ********* set the properteis befor loading the xml configuration");
 		System.setProperty("abc.value", "dilip");
 
 	}

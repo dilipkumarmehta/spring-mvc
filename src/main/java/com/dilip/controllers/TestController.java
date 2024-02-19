@@ -78,7 +78,7 @@ public class TestController {
 
 	@RequestMapping(value = "/home")
 	public String home() {
-		System.out.println("home call");
+		System.out.println("home api request received");
 
 		return "index";
 	}
@@ -89,7 +89,7 @@ public class TestController {
 		System.out.println("*************88");
 		Properties properties = System.getProperties();
 		properties.entrySet().stream().forEach(p -> System.out.print(p));
-		System.out.println("index call");
+		System.out.println("index api request received");
 		System.out.println(requesthandelerInterceptor);
 		System.out.println("b2c.clientId " + clientID);
 		return new ModelAndView("index");
@@ -98,9 +98,9 @@ public class TestController {
 
 	@RequestMapping(value = "/req", method = RequestMethod.GET)
 	public ModelAndView httpReqRes(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("req call");
+		System.out.println("req api request received call");
 		HttpSession session = request.getSession();
-		Object attribute = session.getAttribute("hello");
+		Object attribute = session.getAttribute("sessionobject");
 		System.out.println(attribute.toString());
 		return new ModelAndView("index");
 

@@ -9,6 +9,9 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @PropertySource("classpath:application.properties")
 public class AppConfig {
 	
+	/*
+	 * this will load all the application.properties file so that you can use @value in you application
+	 */
 	@Bean
 	public PropertySourcesPlaceholderConfigurer propertyPlaceHolderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
