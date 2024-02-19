@@ -27,4 +27,7 @@
 			<bean class="com.dilip.intercepter.RequesthandelerInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
+	<bean class="com.dilip.config.CustomeProperteis">
+		<property name="name" value="${abc.value}" />
+	</bean>
 </beans>
