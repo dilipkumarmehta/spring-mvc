@@ -11,12 +11,15 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Servlet Filter implementation class SSOFilter
  */
 
 public class SSOFilter implements Filter {
+	private static final Logger logger = LogManager.getLogger(SSOFilter.class);
 
 	/**
 	 * @see HttpFilter#HttpFilter()
@@ -40,13 +43,19 @@ public class SSOFilter implements Filter {
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
+		logger.trace("This is a TRACE message");
+		logger.debug("This is a DEBUG message");
+		logger.info("This is an INFO message");
+		logger.warn("This is a WARN message");
+		logger.error("This is an ERROR message");
+		logger.fatal("This is a FATAL message");
 		System.out.println("doFilter method called");
 		// pass the request along the filter chain
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		HttpSession session = httpRequest.getSession();
 		session.setAttribute("sessionobject", "mysessionObject");
-		
+
 		chain.doFilter(request, response);
 	}
 
@@ -54,7 +63,7 @@ public class SSOFilter implements Filter {
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
+		System.out.println("******Filter initializtion******");
 	}
 
 }
